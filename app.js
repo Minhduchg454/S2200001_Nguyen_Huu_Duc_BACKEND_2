@@ -1,18 +1,23 @@
-// Thêm các framework cần thiết
+// Them cac framework can thiet
 const express = require("express");
 const cors = require("cors");
 
-// Khởi tạo ứng dụng, một thể hiện của express
+const contactsRouter = require("./app/routes/contact.route");
+
+// Khoi tao ung dung, mot the hien cua express
 const app = express();
 
-// Định nghĩa các middleware
+// Dinh nghia cac middleware, 
 app.use(cors());
 app.use(express.json());
+app.use("/api/contacts", contactsRouter);
 
-// Định nghĩa các route
+// Dinh nghia cac route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to contact book application." });
-});
+  res.json({ message: "Wellcome to contact book application." });
+})
 
-// Xuất module app để có thể sử dụng ở file khác
+//Xuat module app de co the su dung o file khac
 module.exports = app;
+
+
