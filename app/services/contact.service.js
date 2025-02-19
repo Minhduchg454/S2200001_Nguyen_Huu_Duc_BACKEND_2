@@ -4,7 +4,6 @@ class ContactService {
     constructor(client){
         this.Contact = client.db().collection('contacts');
     }
-
     extractContactData (payload) {
         const contact = {
             name: payload.name,
@@ -20,7 +19,6 @@ class ContactService {
         return contact;    
 
     }
-
     async create(payload){
         const contact = this.extractContactData(payload);
         const result = await this.Contact.findOneAndUpdate(
@@ -32,5 +30,4 @@ class ContactService {
     }
 
 }
-
 module.exports = ContactService;
