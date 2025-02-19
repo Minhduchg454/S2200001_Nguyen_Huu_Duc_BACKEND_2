@@ -1,4 +1,4 @@
-const { ObjectId, ReturnDocument } = require('mongodb');
+const { ObjectId} = require('mongodb');
 
 class ContactService {
     constructor(client){
@@ -22,7 +22,7 @@ class ContactService {
     }
 
     async create(payload){
-        const contact = this.extractContactDat(payload);
+        const contact = this.extractContactData(payload);
         const result = await this.Contact.findOneAndUpdate(
             contact,
             { $set: {favorite: contact.favorite == true} },
@@ -30,8 +30,6 @@ class ContactService {
         );
         return result;
     }
-
-
 
 }
 

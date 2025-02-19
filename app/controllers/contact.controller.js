@@ -1,6 +1,6 @@
 const ContactService = require ("../services/contact.service");
-const MongoDB = require("../config/mongodb");
-const ApiError = require("../error/api.error");
+const MongoDB = require("../utils/mongodb.util");
+const ApiError = require("../api-error");
 
 
 exports.create = async(req, res, next) => {
