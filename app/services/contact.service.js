@@ -1,9 +1,11 @@
 const { ObjectId} = require('mongodb');
 
 class ContactService {
+    
     constructor(client){
         this.Contact = client.db().collection('contacts');
     }
+
     extractContactData (payload) {
         const contact = {
             name: payload.name,
@@ -19,6 +21,7 @@ class ContactService {
         return contact;    
 
     }
+
     async create(payload){
         const contact = this.extractContactData(payload);
         const result = await this.Contact.findOneAndUpdate(
@@ -34,8 +37,16 @@ class ContactService {
         return await cursor.toArray();
     }
 
-    async findByName(){
-        
+    async findByName(name){
+        return await this.find( {
+            name: { $regex: new RegExp(new RegExp (name)), $options: "i" }
+        } )
+    }
+
+    async findById (id){
+        return await this.Contact.findOne({ 
+            _id: ObjectId.isValid(id) ? new ObjectId(id) : null,
+        });
     }
 
 }
